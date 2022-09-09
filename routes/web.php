@@ -18,3 +18,5 @@ Route::middleware('guest')->group(function () {
     Route::get('/', [WebController::class, 'index']);
     Route::get('/registrasi', [WebController::class, 'registrasi']);
 });
+
+Route::get('/dashbord',[WebController::class, 'dashbord']);

@@ -17,4 +17,9 @@ class WebController extends Controller
         $title = "Registrasi";
         return view('registrasi', ['title' => $title]);
     }
+    public function dashbord()
+    {
+        $title = "Dashbord";
+        return view('dashbord_user', ['title' => $title]);
+    }
 }
