@@ -16,4 +16,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     Route::get('/', [WebController::class, 'index']);
+    Route::get('/registrasi', [WebController::class, 'registrasi']);
 });

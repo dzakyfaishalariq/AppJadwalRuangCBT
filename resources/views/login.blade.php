@@ -29,7 +29,7 @@
                             </div>
                             <div class="d-grid gap-2 col-6 mx-auto">
                                 <button type="submit" class="btn btn-success mb-3">Login</button>
-                                <a href="#" class=" text-center">Register</a>
+                                <a href="/registrasi" class=" text-center">Register</a>
                             </div>
                         </form>
                     </div>

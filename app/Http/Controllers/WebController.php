@@ -12,4 +12,9 @@ class WebController extends Controller
         $title = "Login";
         return view('login', ['title' => $title]);
     }
+    public function registrasi()
+    {
+        $title = "Registrasi";
+        return view('registrasi', ['title' => $title]);
+    }
 }
