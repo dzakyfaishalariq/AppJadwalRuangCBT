@@ -1,17 +1,30 @@
-<nav class="navbar navbar-expand-lg bg-light animate__animated animate__backInDown">
+<nav class="navbar navbar-expand-lg bg-saya">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">PLK</a>
+        <a class="navbar-brand" href="#">PLK(Penjadwalan Laboratorium Komputer)</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse d-flex flex-row-reverse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">MyName</a>
+                    <a class="nav-link me-md-2" aria-current="page" href="#">MyName</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Logout</a>
+                    <div class="btn-group nav-link me-md-2" role="group" aria-label="Basic outlined example">
+                        <button type="button" class="btn btn-outline-primary">
+                            <div id="jam"></div>
+                        </button>
+                        <button type="button" class="btn btn-outline-primary">
+                            <div id="menit"></div>
+                        </button>
+                        <button type="button" class="btn btn-outline-primary">
+                            <div id="detik"></div>
+                        </button>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-outline-success mt-2" aria-current="page" href="#">Logout</a>
                 </li>
             </ul>
         </div>
