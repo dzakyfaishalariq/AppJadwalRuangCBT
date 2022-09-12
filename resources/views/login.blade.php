@@ -20,14 +20,22 @@
                         <h4>Penjadwalan Laboratorium Komputer</h4>
                     </div>
                     <div class="card-body">
-                        <form action="" method="post">
+                        @if (session('pesan'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ session('pesan') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
+                        <form action="/login" method="post">
+                            @csrf
                             <div class="form-group mb-3">
                                 <input type="text" class="form-control text-center" placeholder="Username"
-                                    name="user" required>
+                                    name="username" required>
                             </div>
                             <div class="form-group mb-3">
                                 <input type="password" class="form-control text-center" placeholder="Password"
-                                    name="pass" required>
+                                    name="password" required>
                             </div>
                             <div class="d-grid gap-2 col-6 mx-auto">
                                 <button type="submit" class="btn btn-success mb-3">Login</button>

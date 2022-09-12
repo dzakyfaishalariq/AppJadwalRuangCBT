@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link me-md-2" aria-current="page" href="#">MyName</a>
+                    <a class="nav-link me-md-2" aria-current="page" href="#">{{ Auth::user()->nama }}</a>
                 </li>
                 <li class="nav-item">
                     <div class="btn-group nav-link me-md-2" role="group" aria-label="Basic outlined example">
@@ -24,7 +24,10 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link btn btn-outline-success mt-2" aria-current="page" href="#">Logout</a>
+                    <a class="nav-link btn btn-outline-success mt-2 me-md-2" aria-current="page" href="#">Informasi Pilihan</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-outline-success mt-2" aria-current="page" href="/logout">Logout</a>
                 </li>
             </ul>
         </div>

@@ -16,8 +16,6 @@ return new class extends Migration
         Schema::create('ruangan_pilih_users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->string('nama_pemesanan');
-            $table->string('prodi');
             $table->integer('sesi');
             $table->time('jam_awal');
             $table->time('jam_akhir');

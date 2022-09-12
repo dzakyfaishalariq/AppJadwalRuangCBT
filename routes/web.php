@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SystemController;
 use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +17,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('guest')->group(function () {
-    Route::get('/', [WebController::class, 'index']);
+    Route::get('/', [WebController::class, 'index'])->name('login');
     Route::get('/registrasi', [WebController::class, 'registrasi']);
+    Route::post('/login', [LoginController::class, 'login']);
 });
 
-Route::get('/dashbord',[WebController::class, 'dashbord']);
+Route::middleware('auth')->group(function () {
+    Route::get('/dashbord', [WebController::class, 'dashbord']);
+    Route::get('/logout', [LoginController::class, 'logout']);
+    Route::post('/pesan', [SystemController::class, 'pesan']);
+});
