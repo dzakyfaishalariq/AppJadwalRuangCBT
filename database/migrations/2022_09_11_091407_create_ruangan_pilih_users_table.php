@@ -21,6 +21,7 @@ return new class extends Migration
             $table->time('jam_akhir');
             $table->text('keterangan');
             $table->boolean('status');
+            $table->date('tanggal_pesan');
             $table->timestamps();
         });
     }

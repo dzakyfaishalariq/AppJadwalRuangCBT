@@ -48,7 +48,9 @@
                                             </table>
                                             <!-- Button trigger modal -->
                                             <div class="d-grid gap-2 col-6 mx-auto">
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                <button type="button"
+                                                    class="btn btn-primary @if ($data->status == 1) disabled @endif"
+                                                    data-bs-toggle="modal"
                                                     data-bs-target="#exampleModal{{ $data->id }}">
                                                     Pesan
                                                 </button>
@@ -77,6 +79,7 @@
                                                     <input type="hidden" name="jam_akhir" value="{{ $data->jam_akhir }}">
                                                     <input type="hidden" name="status" value="1">
                                                     <textarea name="keterangan" id="editor{{ $data->id }}" cols="30" rows="10"></textarea>
+                                                    <input type="hidden" name="tanggal_pesan" value="{{ date('Y-m-d') }}">
                                                     <script>
                                                         // buat ukurannya
                                                         CKEDITOR.replace('editor{{ $data->id }}');

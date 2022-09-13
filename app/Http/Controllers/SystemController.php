@@ -20,6 +20,7 @@ class SystemController extends Controller
         $data->jam_akhir = $request->jam_akhir;
         $data->keterangan = $request->keterangan;
         $data->status = (bool)$request->status;
+        $data->tanggal_pesan = $request->tanggal_pesan;
         $data->save();
         //data untuk jatwal_ruangan_tersedias
         JatwalRuanganTersedia::where('id', (int)$request->jadwal_id)->update(['status' => (bool)$request->status]);

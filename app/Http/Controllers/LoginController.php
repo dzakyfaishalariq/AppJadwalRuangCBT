@@ -12,7 +12,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $validasi = $request->validate([
-            'username' => 'required',
+            'email' => 'required|email:dns',
             'password' => 'required',
         ]);
         if (Auth::attempt($validasi)) {

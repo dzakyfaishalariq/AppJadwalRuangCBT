@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\RuanganPilihUser;
 use App\Models\JatwalRuanganTersedia;
 
 class WebController extends Controller
@@ -36,7 +37,7 @@ class WebController extends Controller
             'data_kamis' => $data_kamis,
             'data_jumat' => $data_jumat,
             'data_sabtu' => $data_sabtu,
-            'data_minggu' =>$data_minggu
+            'data_minggu' => $data_minggu
         ]);
     }
 }
