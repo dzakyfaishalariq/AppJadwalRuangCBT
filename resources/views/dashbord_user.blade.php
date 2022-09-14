@@ -47,7 +47,7 @@
                                                 </tr>
                                             </table>
                                             <!-- Button trigger modal -->
-                                            <div class="d-grid gap-2 col-6 mx-auto">
+                                            <div class=" d-grid gap-2 col-6 mx-auto">
                                                 <button type="button"
                                                     class="btn btn-primary @if ($data->status == 1) disabled @endif"
                                                     data-bs-toggle="modal"

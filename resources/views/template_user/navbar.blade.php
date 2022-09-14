@@ -24,7 +24,8 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link btn btn-outline-success mt-2 me-md-2" aria-current="page" href="#">Informasi Pilihan</a>
+                    <a class="nav-link btn btn-outline-success mt-2 me-md-2" aria-current="page"
+                        href="/informasi_pilihan">Informasi Pilihan</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link btn btn-outline-success mt-2" aria-current="page" href="/logout">Logout</a>

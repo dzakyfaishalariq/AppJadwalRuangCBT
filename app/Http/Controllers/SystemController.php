@@ -24,5 +24,6 @@ class SystemController extends Controller
         $data->save();
         //data untuk jatwal_ruangan_tersedias
         JatwalRuanganTersedia::where('id', (int)$request->jadwal_id)->update(['status' => (bool)$request->status]);
+        return redirect()->intended('/dashbord');
     }
 }

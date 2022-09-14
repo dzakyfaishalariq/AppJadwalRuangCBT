@@ -25,5 +25,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashbord', [WebController::class, 'dashbord']);
     Route::get('/logout', [LoginController::class, 'logout']);
+    Route::get('/informasi_pilihan',[WebController::class, 'informasi_pilihan']);
     Route::post('/pesan', [SystemController::class, 'pesan']);
+    
 });

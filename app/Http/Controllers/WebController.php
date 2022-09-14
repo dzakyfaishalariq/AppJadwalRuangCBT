@@ -40,4 +40,9 @@ class WebController extends Controller
             'data_minggu' => $data_minggu
         ]);
     }
+    public function informasi_pilihan()
+    {
+        $title = 'Pilihan Anda';
+        return view('informasi_pilih', ['title' => $title]);
+    }
 }
