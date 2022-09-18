@@ -16,12 +16,14 @@ return new class extends Migration
         Schema::create('ruangan_pilih_users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
+            $table->foreignId('jatwalruangantersedia_id')->unique();
             $table->integer('sesi');
             $table->time('jam_awal');
             $table->time('jam_akhir');
-            $table->text('keterangan');
+            $table->text('keterangan')->nullable();
             $table->boolean('status');
             $table->date('tanggal_pesan');
+            $table->string('hari');
             $table->timestamps();
         });
     }

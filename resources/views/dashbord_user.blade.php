@@ -1,7 +1,17 @@
 @extends('template_user.main')
 @section('conten')
     <script src="//cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
+    @php
+        date_default_timezone_set('Asia/Jakarta');
+    @endphp
     <hr>
+    @if (session('pesan'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ session('pesan') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    <br>
     <div class="card shadow-lg bg-body">
         <div class="card-header text-center bg-primary text-light">
             <h4>Pilih Jadwal Ruangan Anda</h4>
@@ -55,7 +65,6 @@
                                                     Pesan
                                                 </button>
                                             </div>
-
                                         </div>
                                     </div>
                                 </td>
@@ -73,22 +82,24 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                                                    <input type="hidden" name="jadwal_id" value="{{ $data->id }}">
+                                                    <input type="hidden" name="jatwalruangantersedia_id"
+                                                        value="{{ $data->id }}">
                                                     <input type="hidden" name="sesi" value="{{ $data->sesi }}">
                                                     <input type="hidden" name="jam_awal" value="{{ $data->jam_awal }}">
                                                     <input type="hidden" name="jam_akhir" value="{{ $data->jam_akhir }}">
                                                     <input type="hidden" name="status" value="1">
                                                     <textarea name="keterangan" id="editor{{ $data->id }}" cols="30" rows="10"></textarea>
                                                     <input type="hidden" name="tanggal_pesan" value="{{ date('Y-m-d') }}">
+                                                    <input type="hidden" name="hari" value="{{ $data->hari }}">
                                                     <script>
-                                                        // buat ukurannya
-                                                        CKEDITOR.replace('editor{{ $data->id }}');
+                                                        CKEDITOR.replace('editor{{ $data->id }}')
                                                     </script>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Batal Memesan</button>
-                                                    <button type="submit" class="btn btn-primary">Pesan</button>
+                                                    <button type="submit"
+                                                        class="btn btn-primary @if ($data->jam_awal <= date('H:i:s') && $data->jam_akhir >= date('H:i:s')) disabled @endif">Pesan</button>
                                                 </div>
                                             </form>
                                         </div>

@@ -18,6 +18,9 @@ class LoginController extends Controller
         if (Auth::attempt($validasi)) {
             $request->session()->regenerate();
             return redirect()->intended('/dashbord');
+        } else if (Auth::guard('admin')->attempt($validasi)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/dashboard_admin');
         }
         return back()->with('pesan', 'maaf username dan password anda salah');
     }

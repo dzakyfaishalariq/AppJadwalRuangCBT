@@ -45,4 +45,14 @@ class WebController extends Controller
         $title = 'Pilihan Anda';
         return view('informasi_pilih', ['title' => $title]);
     }
+    public function cetak_pilihan()
+    {
+        $title = "Cetak Laporan";
+        return view('cetak_laporan', ['title' => $title]);
+    }
+    public function dashboard_admin()
+    {
+        $title = "Admin";
+        return view('dasbord_admin', ['title' => $title]);
+    }
 }

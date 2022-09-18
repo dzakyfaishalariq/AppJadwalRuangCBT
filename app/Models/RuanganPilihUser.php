@@ -13,4 +13,8 @@ class RuanganPilihUser extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function jatwalruangantersedia()
+    {
+        return $this->belongsTo(JatwalRuanganTersedia::class);
+    }
 }

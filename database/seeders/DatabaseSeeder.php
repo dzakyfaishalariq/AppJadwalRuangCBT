@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Admin;
 use App\Models\JatwalRuanganTersedia;
 
 class DatabaseSeeder extends Seeder
@@ -29,9 +30,31 @@ class DatabaseSeeder extends Seeder
             'email' => 'budi@gmail.com',
             'password' => bcrypt('budi12345'),
         ]);
-        $jam_awal = ['08:00', '10:00', '13:00', '15:00'];
-        $jam_akhir = ['09:30', '11:30', '14:30', '16:30'];
-        for ($i = 0; $i < 4; $i++) {
+        User::create([
+            'prodi' => 'STR Kebidanan',
+            'nama' => 'Erlin Kurnia',
+            'tingkat' => 2,
+            'email' => 'Erlin@gmail.com',
+            'password' => bcrypt('Erlin12345'),
+        ]);
+        User::create([
+            'prodi' => 'D3 Gizi',
+            'nama' => 'Andi Gustiyo',
+            'tingkat' => 4,
+            'email' => 'Andi@gmail.com',
+            'password' => bcrypt('Andi12345'),
+        ]);
+
+        // admin
+
+        Admin::create([
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('admin12345'),
+        ]);
+
+        $jam_awal = ['08:00', '09:00', '10:00', '11:00', '13:00', '14:00', '15:00'];
+        $jam_akhir = ['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00'];
+        for ($i = 0; $i < 7; $i++) {
             $k = $i + 1;
             $hari = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
             for ($j = 0; $j < 7; $j++) {
