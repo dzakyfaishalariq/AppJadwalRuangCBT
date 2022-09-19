@@ -34,4 +34,6 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth:admin')->group(function () {
     Route::get('/dashboard_admin', [WebController::class, 'dashboard_admin']);
+    Route::get('/manajemen_user', [WebController::class, 'manajemen_user']);
+    Route::get('/logout_admin', [LoginController::class, 'logout_admin']);
 });

@@ -6,13 +6,26 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\RuanganPilihUser;
 use App\Models\JatwalRuanganTersedia;
+use App\Models\History;
+
 use Illuminate\Support\Facades\Validator;
+
 
 class SystemController extends Controller
 {
     //pesanan ruangan user
     public function pesan(Request $request)
     {
+        //sambilan memasukan data history
+        $history = new History;
+        $history->user_id = (int)$request->user_id;
+        $history->jatwalruangantersedia_id = (int)$request->jatwalruangantersedia_id;
+        $history->hari = $request->hari;
+        $history->tanggal_pemesanan = $request->tanggal_pesan;
+        $history->jam_awal = $request->jam_awal;
+        $history->jam_akhir = $request->jam_akhir;
+        $history->prodi = $request->prodi;
+        $nilai2 = $history->save();
         //data untuk RuanganPilihUser
         $data = new RuanganPilihUser;
         $rules = [
@@ -30,6 +43,7 @@ class SystemController extends Controller
             'jatwalruangantersedia_id.unique' => 'maaf jadwal sudah di pesan sama orang lain harap memilih jadwal yang kosong lainnya',
         ];
         $validasi = Validator::make($request->all(), $rules, $text);
+        // digunakan untuk antisipasi nantinya dalam memilih jatwal yang tertindih di dalam system
         if ($validasi->fails()) {
             return redirect()->intended('/dashbord')->with('pesan', $validasi->errors()->first());
         }
@@ -44,7 +58,7 @@ class SystemController extends Controller
         $data->hari = $request->hari;
         $nilai = $data->save();
         //data untuk jatwal_ruangan_tersedias
-        if ($nilai) {
+        if ($nilai && $nilai2) {
             JatwalRuanganTersedia::where('id', (int)$request->jatwalruangantersedia_id)->update(['status' => (bool)$request->status]);
             return redirect()->intended('/dashbord')->with('pesan', 'Data anda sudah di pesan');
         } else {

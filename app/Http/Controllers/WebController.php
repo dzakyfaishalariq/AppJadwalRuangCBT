@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\History;
 use App\Models\RuanganPilihUser;
 use App\Models\JatwalRuanganTersedia;
 
@@ -21,13 +23,13 @@ class WebController extends Controller
     }
     public function dashbord()
     {
-        $data_senin = JatwalRuanganTersedia::where('hari', 'Monday')->get();
-        $data_selasa = JatwalRuanganTersedia::where('hari', 'Tuesday')->get();
-        $data_rabu = JatwalRuanganTersedia::where('hari', 'Wednesday')->get();
-        $data_kamis = JatwalRuanganTersedia::where('hari', 'Thursday')->get();
-        $data_jumat = JatwalRuanganTersedia::where('hari', 'Friday')->get();
-        $data_sabtu = JatwalRuanganTersedia::where('hari', 'Saturday')->get();
-        $data_minggu = JatwalRuanganTersedia::where('hari', 'Sunday')->get();
+        $data_senin = JatwalRuanganTersedia::where('hari', 'Senin')->get();
+        $data_selasa = JatwalRuanganTersedia::where('hari', 'Selasa')->get();
+        $data_rabu = JatwalRuanganTersedia::where('hari', 'Rabu')->get();
+        $data_kamis = JatwalRuanganTersedia::where('hari', 'Kamis')->get();
+        $data_jumat = JatwalRuanganTersedia::where('hari', 'Jumat')->get();
+        $data_sabtu = JatwalRuanganTersedia::where('hari', 'Sabtu')->get();
+        $data_minggu = JatwalRuanganTersedia::where('hari', 'Minggu')->get();
         $title = "Dashbord";
         return view('dashbord_user', [
             'title' => $title,
@@ -53,6 +55,18 @@ class WebController extends Controller
     public function dashboard_admin()
     {
         $title = "Admin";
-        return view('dasbord_admin', ['title' => $title]);
+        $data_jumlah = [
+            User::all()->count(),
+            JatwalRuanganTersedia::all()->count(),
+            RuanganPilihUser::all()->count(),
+            History::latest()->get(),
+        ];
+        return view('dasbord_admin', ['title' => $title, 'data_jumlah' => $data_jumlah]);
+    }
+    public function manajemen_user()
+    {
+        $title = "Manajemen User";
+        $data = User::latest()->get();
+        return view('manajemen_user', ['title' => $title, 'data' => $data]);
     }
 }

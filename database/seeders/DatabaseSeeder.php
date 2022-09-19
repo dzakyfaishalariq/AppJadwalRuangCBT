@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
         $jam_akhir = ['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00'];
         for ($i = 0; $i < 7; $i++) {
             $k = $i + 1;
-            $hari = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            $hari = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
             for ($j = 0; $j < 7; $j++) {
                 JatwalRuanganTersedia::create([
                     'jam_awal' => $jam_awal[$i],

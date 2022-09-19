@@ -82,6 +82,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                                    <input type="hidden" name="prodi" value="{{ Auth::user()->prodi }}">
                                                     <input type="hidden" name="jatwalruangantersedia_id"
                                                         value="{{ $data->id }}">
                                                     <input type="hidden" name="sesi" value="{{ $data->sesi }}">

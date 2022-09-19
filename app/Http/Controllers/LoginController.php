@@ -32,4 +32,11 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
         return redirect()->intended('/');
     }
+    public function logout_admin(Request $request)
+    {
+        Auth::guard('admin')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->intended('/');
+    }
 }
