@@ -77,4 +77,76 @@ class SystemController extends Controller
         $id->save();
         return redirect()->intended('/informasi_pilihan');
     }
+    public function tambah_data_user_admin(Request $request)
+    {
+        $data = new User;
+        $rules = [
+            'prodi' => 'required',
+            'nama' => 'required',
+            'tingkat' => 'required|integer',
+            'email' => 'email:rfc,dns',
+            'password' => 'required'
+        ];
+        $text = [
+            'prodi.required' => 'Data tidak boleh kosong',
+            'nama.required' => 'Data tidak boleh kosong',
+            'tingkat.required' => 'Data tidak boleh kosong',
+            'email.required' => 'Data tidak boleh kosong',
+            'email.email' => 'Buat email yang benar',
+            'password.required' => 'Data tidak boleh kosong',
+        ];
+        $validasi = Validator::make($request->all(), $rules, $text);
+        if ($validasi->fails()) {
+            return redirect()->intended('/manajemen_user')->with('error', $validasi->errors()->first());
+        }
+        $data->prodi = $request->prodi;
+        $data->nama = $request->nama;
+        $data->tingkat = (int)$request->tingkat;
+        $data->email = $request->email;
+        $data->password = bcrypt($request->password);
+        $nilai = $data->save();
+        if ($nilai) {
+            return redirect()->intended('/manajemen_user')->with('pesan', 'Data terkirim');
+        } else {
+            return redirect()->intended('/manajemen_user')->with('error', 'Data Belum Terkirim');
+        }
+    }
+    public function hapus_data_user(User $id)
+    {
+        $id->delete();
+        return redirect()->intended('/manajemen_user');
+    }
+    public function update_data_user_admin(Request $request, User $id)
+    {
+        $rules = [
+            'prodi' => 'required',
+            'nama' => 'required',
+            'tingkat' => 'required|integer',
+            'email' => 'email:rfc,dns',
+            'password' => 'required'
+        ];
+        $text = [
+            'prodi.required' => 'Data tidak boleh kosong',
+            'nama.required' => 'Data tidak boleh kosong',
+            'tingkat.required' => 'Data tidak boleh kosong',
+            'email.required' => 'Data tidak boleh kosong',
+            'email.email' => 'Buat email yang benar',
+            'password.required' => 'Data tidak boleh kosong',
+        ];
+        $validasi = Validator::make($request->all(), $rules, $text);
+        if ($validasi->fails()) {
+            return redirect()->intended('/manajemen_user')->with('error', $validasi->errors()->first());
+        }
+        $id->prodi = $request->prodi;
+        $id->nama = $request->nama;
+        $id->tingkat = (int)$request->tingkat;
+        $id->email = $request->email;
+        $id->password = bcrypt($request->password);
+        $nilai = $id->save();
+        if ($nilai) {
+            return redirect()->intended('/manajemen_user')->with('pesan', 'Data Berhasil Di edit!');
+        } else {
+            return redirect()->intended('/manajemen_user')->with('error', 'Data Belum Teredit!');
+        }
+    }
 }

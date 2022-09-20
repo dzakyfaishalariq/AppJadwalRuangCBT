@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('guest')->group(function () {
     Route::get('/', [WebController::class, 'index'])->name('login');
     Route::get('/registrasi', [WebController::class, 'registrasi']);
+    Route::post('/registrasi_system', [LoginController::class, 'registrasi_system']);
     Route::post('/login', [LoginController::class, 'login']);
 });
 
@@ -35,5 +36,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth:admin')->group(function () {
     Route::get('/dashboard_admin', [WebController::class, 'dashboard_admin']);
     Route::get('/manajemen_user', [WebController::class, 'manajemen_user']);
+    Route::post('/tambah_data_user_admin', [SystemController::class, 'tambah_data_user_admin']);
+    Route::get('/hapus_data_user_{id}', [SystemController::class, 'hapus_data_user']);
+    Route::put('/update_data_user_admin_{id}', [SystemController::class, 'update_data_user_admin']);
     Route::get('/logout_admin', [LoginController::class, 'logout_admin']);
 });

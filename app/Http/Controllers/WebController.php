@@ -57,7 +57,7 @@ class WebController extends Controller
         $title = "Admin";
         $data_jumlah = [
             User::all()->count(),
-            JatwalRuanganTersedia::all()->count(),
+            JatwalRuanganTersedia::all()->count() - RuanganPilihUser::all()->count(),
             RuanganPilihUser::all()->count(),
             History::latest()->get(),
         ];
