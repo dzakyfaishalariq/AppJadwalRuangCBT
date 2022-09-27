@@ -72,7 +72,7 @@
             </div>
         </div>
         <div class="col-xl-12 bg-warning rounded-3 mb-4 p-3 shadow-lg">
-            <h3>history</h3>
+            <h3>History Pemilihan Rungan</h3>
             <hr>
             <table class="table table-bordered table-striped table-light">
                 <thead>
@@ -82,7 +82,6 @@
                         <th>Tanggal Pemesanan</th>
                         <th>Jam</th>
                         <th>Prodi</th>
-                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -96,18 +95,6 @@
                             <td>{{ $data->tanggal_pemesanan }}</td>
                             <td>{{ $data->jam_awal }} - {{ $data->jam_akhir }}</td>
                             <td>{{ $data->prodi }}</td>
-                            <td>
-                                <a href="#" class="btn btn-outline-danger">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                        <path
-                                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                        <path fill-rule="evenodd"
-                                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                    </svg>
-                                    Hapus
-                                </a>
-                            </td>
                         </tr>
                         @php
                             $no++;
@@ -116,7 +103,7 @@
                 </tbody>
             </table>
             <hr>
-            <a href="#" class="btn btn-outline-info">
+            <a href="/cetak_laporan_admin" target="blank" class="btn btn-info">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-printer" viewBox="0 0 16 16">
                     <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />

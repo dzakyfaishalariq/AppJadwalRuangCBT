@@ -10,7 +10,6 @@ use App\Models\History;
 
 use Illuminate\Support\Facades\Validator;
 
-
 class SystemController extends Controller
 {
     //pesanan ruangan user
@@ -36,6 +35,7 @@ class SystemController extends Controller
             'jam_akhir' => 'required',
             'keterangan' => 'required',
             'status' => 'required|boolean',
+            'acc' => 'required|boolean',
             'tanggal_pesan' => 'required',
             'hari' => 'required',
         ];
@@ -54,6 +54,7 @@ class SystemController extends Controller
         $data->jam_akhir = $request->jam_akhir;
         $data->keterangan = $request->keterangan;
         $data->status = (bool)$request->status;
+        $data->acc = (bool)$request->acc;
         $data->tanggal_pesan = $request->tanggal_pesan;
         $data->hari = $request->hari;
         $nilai = $data->save();
@@ -62,7 +63,7 @@ class SystemController extends Controller
             JatwalRuanganTersedia::where('id', (int)$request->jatwalruangantersedia_id)->update(['status' => (bool)$request->status]);
             return redirect()->intended('/dashbord')->with('pesan', 'Data anda sudah di pesan');
         } else {
-            return redirect()->intended('/dashbord')->with('pesan', 'maaf data anda belum terpesan');
+            return redirect()->intended('/dashbord')->with('error', 'maaf data anda belum terpesan');
         }
     }
     public function hapus(Request $request, RuanganPilihUser $id)
@@ -84,7 +85,7 @@ class SystemController extends Controller
             'prodi' => 'required',
             'nama' => 'required',
             'tingkat' => 'required|integer',
-            'email' => 'email:rfc,dns',
+            'email' => 'required|email:rfc,dns|unique:users',
             'password' => 'required'
         ];
         $text = [
@@ -93,6 +94,7 @@ class SystemController extends Controller
             'tingkat.required' => 'Data tidak boleh kosong',
             'email.required' => 'Data tidak boleh kosong',
             'email.email' => 'Buat email yang benar',
+            'email.unique' => 'Email sudah ada yang punya harap isi lagi data dan gunakan email lainnya',
             'password.required' => 'Data tidak boleh kosong',
         ];
         $validasi = Validator::make($request->all(), $rules, $text);
@@ -148,5 +150,41 @@ class SystemController extends Controller
         } else {
             return redirect()->intended('/manajemen_user')->with('error', 'Data Belum Teredit!');
         }
+    }
+    public function manajemen_pemesanan_acc(Request $request)
+    {
+        $data = new RuanganPilihUser;
+        foreach ($data->all() as $d) {
+            if ($request->{$d->id} == "1") {
+                $d->acc = (bool)$request->{$d->id};
+                $d->save();
+            }
+            if ($request->{$d->id} == "0") {
+                $d->acc = (bool)$request->{$d->id};
+                $d->save();
+            }
+        }
+        return redirect()->intended('/manajemen_pemesanan');
+    }
+    public function hapus_manajemen_pemesanan(Request $request, RuanganPilihUser $id)
+    {
+        JatwalRuanganTersedia::where('id', $id->jatwalruangantersedia_id)->update(['status' => 0]);
+        $id->delete();
+        return redirect()->intended('/manajemen_pemesanan');
+    }
+    public function perbarui_jam(Request $request, JatwalRuanganTersedia $id)
+    {
+        $id->jam_awal = $request->jam_awal;
+        $id->jam_akhir = $request->jam_akhir;
+        $id->save();
+        return redirect()->intended('/manajemen_jatwal');
+    }
+    public function reset_pemesanan(User $id)
+    {
+        foreach ($id->ruanganpilihuser as $d) {
+            JatwalRuanganTersedia::where('id', $d->jatwalruangantersedia_id)->update(['status' => 0]);
+            $d->delete();
+        }
+        return redirect()->intended('/manajemen_pemesanan');
     }
 }

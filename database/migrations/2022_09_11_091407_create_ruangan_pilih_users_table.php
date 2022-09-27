@@ -22,6 +22,7 @@ return new class extends Migration
             $table->time('jam_akhir');
             $table->text('keterangan')->nullable();
             $table->boolean('status');
+            $table->boolean('acc');
             $table->date('tanggal_pesan');
             $table->string('hari');
             $table->timestamps();

@@ -253,6 +253,7 @@
                     }
                 </script>
             @endforeach
+            {{ $data->links() }}
         </div>
     </div>
     @if (session('pesan'))

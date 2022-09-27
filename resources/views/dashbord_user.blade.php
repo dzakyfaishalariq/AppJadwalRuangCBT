@@ -4,13 +4,32 @@
     @php
         date_default_timezone_set('Asia/Jakarta');
     @endphp
+    @php
+        switch (date('l')) {
+            case 'Monday':
+                $hari_1 = 'Senin';
+                break;
+            case 'Tuesday':
+                $hari_1 = 'Selasa';
+                break;
+            case 'Wednesday':
+                $hari_1 = 'Rabu';
+                break;
+            case 'Thursday':
+                $hari_1 = 'Kamis';
+                break;
+            case 'Friday':
+                $hari_1 = 'Jumat';
+                break;
+            case 'Saturday':
+                $hari_1 = 'Sabtu';
+                break;
+            case 'Sunday':
+                $hari_1 = 'Minggu';
+                break;
+        }
+    @endphp
     <hr>
-    @if (session('pesan'))
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            {{ session('pesan') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
     <br>
     <div class="card shadow-lg bg-body">
         <div class="card-header text-center bg-primary text-light">
@@ -30,7 +49,7 @@
                                 <td>
                                     <div class="card" style="width: 340px;">
                                         <div class="card-body">
-                                            <table class=" table">
+                                            <table class=" table text-small">
                                                 <tr>
                                                     <td>Sesi</td>
                                                     <td>:</td>
@@ -92,6 +111,7 @@
                                                     <textarea name="keterangan" id="editor{{ $data->id }}" cols="30" rows="10"></textarea>
                                                     <input type="hidden" name="tanggal_pesan" value="{{ date('Y-m-d') }}">
                                                     <input type="hidden" name="hari" value="{{ $data->hari }}">
+                                                    <input type="hidden" name="acc" value="0">
                                                     <script>
                                                         CKEDITOR.replace('editor{{ $data->id }}')
                                                     </script>
@@ -100,7 +120,7 @@
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Batal Memesan</button>
                                                     <button type="submit"
-                                                        class="btn btn-primary @if ($data->jam_awal <= date('H:i:s') && $data->jam_akhir >= date('H:i:s')) disabled @endif">Pesan</button>
+                                                        class="btn btn-primary @if ($data->jam_awal <= date('H:i:s') && $data->jam_akhir >= date('H:i:s') && $hari_1 == $data->hari) disabled @endif">Pesan</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -113,4 +133,19 @@
             </table>
         </div>
     </div>
+    @if (session('pesan'))
+        <script>
+            Swal.fire({
+                text: "{{ session('pesan') }}",
+                icon: 'success',
+            })
+        </script>
+    @elseif(session('error'))
+        <script>
+            Swal.fire({
+                text: "{{ session('error') }}",
+                icon: 'error',
+            })
+        </script>
+    @endif
 @endsection

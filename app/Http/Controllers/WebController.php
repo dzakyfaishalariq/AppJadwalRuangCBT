@@ -66,7 +66,38 @@ class WebController extends Controller
     public function manajemen_user()
     {
         $title = "Manajemen User";
-        $data = User::latest()->get();
+        $data = User::latest()->paginate(4);
         return view('manajemen_user', ['title' => $title, 'data' => $data]);
+    }
+    public function manajemen_pemesanan()
+    {
+        $title = "Manajemen pemesanan";
+        $data = User::latest()->get();
+        return view('manajemen_pemesanan', ['title' => $title, 'data' => $data]);
+    }
+    public function manajemen_jatwal()
+    {
+        $title = "Manajemen Jatwal";
+        $data = JatwalRuanganTersedia::all();
+        return view('manajemen_jatwal', ['title' => $title, 'data' => $data]);
+    }
+    public function cetak_laporan_admin()
+    {
+        $title = "Cetak Laporan Admin";
+        $data = History::all();
+        return view('cetak_laporan_admin', ['title' => $title, 'data' => $data]);
+    }
+    public function grafik_laporan()
+    {
+        $title = "Gerafik laporan";
+        $data = User::all();
+        $nama = [];
+        $jumlah_dipilih = [];
+        foreach ($data as $d) {
+            $nama[] = $d->nama;
+            $jumlah_dipilih[] = $d->ruanganpilihuser->count();
+        }
+        //dd($nama,$jumlah_dipilih);
+        return view('grafik_laporan', ['title' => $title, 'nama' => $nama, 'jumlah_dipilih' => $jumlah_dipilih]);
     }
 }

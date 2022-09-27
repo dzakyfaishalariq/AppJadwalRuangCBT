@@ -19,6 +19,7 @@
                                 <th>keterangan</th>
                                 <th>Tanggal Pesan</th>
                                 <th>Hari</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -37,14 +38,24 @@
                                     <td>{{ $data->tanggal_pesan }}</td>
                                     <td>{{ $data->hari }}</td>
                                     <td>
+                                        @if ($data->acc == '1')
+                                            <span class=" badge text-bg-success">Disetujui</span>
+                                        @else
+                                            <span class=" badge text-bg-danger">Belum Disetujui</span>
+                                        @endif
+                                    </td>
+                                    <td>
                                         <form action="/hapus_{{ $data->id }}" method="post">
                                             @csrf
                                             <input type="hidden" name="jatwalruangantersedia_id"
                                                 value="{{ $data->jatwalruangantersedia_id }}">
-                                            <button type="submit" class="btn btn-danger">Batalkan Pemesanan</button>
+                                            <button type="submit" class="btn btn-danger"
+                                                @if ($data->acc == '1') disabled @endif>Batalkan
+                                                Pemesanan</button>
                                             <!-- Button trigger modal -->
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal{{ $data->id }}">
+                                                data-bs-target="#exampleModal{{ $data->id }}"
+                                                @if ($data->acc == '1') disabled @endif>
                                                 Edit Keterangan
                                             </button>
 
@@ -95,7 +106,15 @@
                     <h1 class="text-center"><span class=" badge text-bg-danger">Anda Belum Memesan</span></h1>
                 @endif
                 <hr>
-                <a href="/cetak_laporan" target="blank" class="btn btn-info me-md-2">Cetak</a>
+                @php
+                    $jumlah_acc = 0;
+                    foreach (Auth::user()->ruanganpilihuser as $data) {
+                        $jumlah_acc += $data->acc;
+                    }
+                    $kondisi = $jumlah_acc != Auth::user()->ruanganpilihuser->count();
+                @endphp
+                <a href="/cetak_laporan" target="blank"
+                    class="btn btn-info me-md-2 @if($kondisi) disabled @endif">Cetak</a>
                 <a href="/dashbord" class="btn btn-secondary me-md-2">Kembali</a>
             </div>
         </div>
