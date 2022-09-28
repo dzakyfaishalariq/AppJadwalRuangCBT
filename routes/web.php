@@ -36,16 +36,19 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth:admin')->group(function () {
     Route::get('/dashboard_admin', [WebController::class, 'dashboard_admin']);
     Route::get('/manajemen_user', [WebController::class, 'manajemen_user']);
+    Route::post('/manajemen_user_cari', [WebController::class, 'manajemen_user']);
     Route::post('/tambah_data_user_admin', [SystemController::class, 'tambah_data_user_admin']);
     Route::get('/hapus_data_user_{id}', [SystemController::class, 'hapus_data_user']);
     Route::put('/update_data_user_admin_{id}', [SystemController::class, 'update_data_user_admin']);
     Route::get('/manajemen_pemesanan', [WebController::class, 'manajemen_pemesanan']);
-    Route::post('/manajemen_pemesanan_acc',[SystemController::class,'manajemen_pemesanan_acc']);
-    Route::get('/hapus_manajemen_pemesanan_{id}',[SystemController::class,'hapus_manajemen_pemesanan']);
-    Route::get('/reset_pemesanan_{id}',[SystemController::class,'reset_pemesanan']);
+    Route::get('/cetak_manajemen_pemesanan_{id}', [WebController::class, 'cetak_manajemen_pemesanan']);
+    Route::post('/manajemen_pemesanan_acc', [SystemController::class, 'manajemen_pemesanan_acc']);
+    Route::get('/hapus_manajemen_pemesanan_{id}', [SystemController::class, 'hapus_manajemen_pemesanan']);
+    Route::get('/reset_pemesanan_{id}', [SystemController::class, 'reset_pemesanan']);
     Route::get('/manajemen_jatwal', [WebController::class, 'manajemen_jatwal']);
-    Route::put('/perbarui_jam_{id}',[SystemController::class, 'perbarui_jam']);
+    Route::post('/manajemen_jatwal_cari', [WebController::class, 'manajemen_jatwal']);
+    Route::put('/perbarui_jam_{id}', [SystemController::class, 'perbarui_jam']);
     Route::get('/cetak_laporan_admin', [WebController::class, 'cetak_laporan_admin']);
-    Route::get('/grafik_laporan',[WebController::class,'grafik_laporan']);
+    Route::get('/grafik_laporan', [WebController::class, 'grafik_laporan']);
     Route::get('/logout_admin', [LoginController::class, 'logout_admin']);
 });

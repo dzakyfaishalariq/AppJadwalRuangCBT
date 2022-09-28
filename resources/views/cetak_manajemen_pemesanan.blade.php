@@ -27,7 +27,7 @@
 </head>
 
 <body>
-    <h1 class="judul">JADWAL RUANGAN UJIAN CBT HISTORY</h1>
+    <h1 class="judul">JADWAL RUANGAN UJIAN CBT</h1>
     <h1 class="judul">POLTEKES KEMENKES BENGKULU</h1>
     <hr>
     <table>
@@ -37,7 +37,9 @@
                 <th>Hari</th>
                 <th>Tanggal Pemesanan</th>
                 <th>Jam</th>
+                <th>Nama Pemilih</th>
                 <th>Prodi</th>
+                <th>Keterangan</th>
             </tr>
         </thead>
         <tbody>
@@ -52,17 +54,21 @@
                     <tr style="background-color: yellow;">
                         <td>{{ $no }}</td>
                         <td>{{ $d->hari }}</td>
-                        <td>{{ $d->tanggal_pemesanan }}</td>
+                        <td>{{ $d->tanggal_pesan }}</td>
                         <td>{{ $d->jam_awal }}-{{ $d->jam_akhir }}</td>
-                        <td>{{ $d->prodi }}</td>
+                        <td>{{ $nama }}</td>
+                        <td>{{ $prodi }}</td>
+                        <td>{!! $d->keterangan !!}</td>
                     </tr>
                 @else
                     <tr>
                         <td>{{ $no }}</td>
                         <td>{{ $d->hari }}</td>
-                        <td>{{ $d->tanggal_pemesanan }}</td>
+                        <td>{{ $d->tanggal_pesan }}</td>
                         <td>{{ $d->jam_awal }}-{{ $d->jam_akhir }}</td>
-                        <td>{{ $d->prodi }}</td>
+                        <td>{{ $nama }}</td>
+                        <td>{{ $prodi }}</td>
+                        <td>{!! $d->keterangan !!}</td>
                     </tr>
                 @endif
             @endforeach

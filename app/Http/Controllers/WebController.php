@@ -66,7 +66,11 @@ class WebController extends Controller
     public function manajemen_user()
     {
         $title = "Manajemen User";
-        $data = User::latest()->paginate(4);
+        if (request()->has('user')) {
+            $data = User::where('nama', 'LIKE', '%' . request('user') . '%')->orWhere('prodi', 'LIKE', '%' . request('user') . '%')->orWhere('tingkat', 'LIKE', '%' . request('user') . '%')->paginate(4);
+        } else {
+            $data = User::latest()->paginate(4);
+        }
         return view('manajemen_user', ['title' => $title, 'data' => $data]);
     }
     public function manajemen_pemesanan()
@@ -77,9 +81,15 @@ class WebController extends Controller
     }
     public function manajemen_jatwal()
     {
-        $title = "Manajemen Jatwal";
-        $data = JatwalRuanganTersedia::all();
-        return view('manajemen_jatwal', ['title' => $title, 'data' => $data]);
+        if (request()->has('cari')) {
+            $title = "Manajemen Jatwal";
+            $data = JatwalRuanganTersedia::where('hari', 'LIKE', '%' . request('cari') . '%')->get();
+            return view('manajemen_jatwal', ['title' => $title, 'data' => $data]);
+        } else {
+            $title = "Manajemen Jatwal";
+            $data = JatwalRuanganTersedia::all();
+            return view('manajemen_jatwal', ['title' => $title, 'data' => $data]);
+        }
     }
     public function cetak_laporan_admin()
     {
@@ -99,5 +109,13 @@ class WebController extends Controller
         }
         //dd($nama,$jumlah_dipilih);
         return view('grafik_laporan', ['title' => $title, 'nama' => $nama, 'jumlah_dipilih' => $jumlah_dipilih]);
+    }
+    public function cetak_manajemen_pemesanan(User $id)
+    {
+        $title = "Cetak Pemesanan";
+        $data = $id->ruanganpilihuser;
+        $nama = $id->nama;
+        $prodi = $id->prodi;
+        return view('cetak_manajemen_pemesanan', ['title' => $title, 'data' => $data, 'nama' => $nama, 'prodi' => $prodi]);
     }
 }

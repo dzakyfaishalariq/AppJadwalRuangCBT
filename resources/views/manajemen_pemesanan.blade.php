@@ -92,8 +92,16 @@
                                     </tbody>
                                 </table>
                                 <hr>
+                                @php
+                                    $data_acc = 0;
+                                    foreach ($d->ruanganpilihuser as $e) {
+                                        $data_acc += $e->acc;
+                                    }
+                                    $kondisi = $data_acc != $d->ruanganpilihuser->count();
+                                @endphp
                                 <button type="submit" class="btn btn-primary">Save</button>
-                                <a href="#" class="btn btn-secondary">Cetak</a>
+                                <a href="/cetak_manajemen_pemesanan_{{ $d->id }}" target="blank"
+                                    class="btn btn-secondary @if ($kondisi) disabled @endif">Cetak</a>
                                 <a href="/reset_pemesanan_{{ $d->id }}" class=" btn btn-danger">Hapus Semua</a>
                             </form>
                         @else
