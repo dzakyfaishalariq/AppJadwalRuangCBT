@@ -30,6 +30,19 @@
         }
     @endphp
     <hr>
+    @php
+        $total_data_pilihan = Auth::user()->ruanganpilihuser->count();
+        $persentase = ($total_data_pilihan / 7) * 100;
+    @endphp
+    <h6 class=" text-center text-white"><span class=" badge bg-danger">Maksimum Memilih 7 Jadwal</span></h6>
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning text-dark" role="progressbar"
+            aria-label="Animated striped example" aria-valuenow="{{ $persentase }}" aria-valuemin="0" aria-valuemax="100"
+            style="width: {{ $persentase }}%">
+            <strong>{{ (int) $persentase }}%</strong>
+        </div>
+    </div>
+    <hr>
     <br>
     <div class="card shadow-lg bg-body">
         <div class="card-header text-center bg-primary text-light">
@@ -78,7 +91,7 @@
                                             <!-- Button trigger modal -->
                                             <div class=" d-grid gap-2 col-6 mx-auto">
                                                 <button type="button"
-                                                    class="btn btn-primary @if ($data->status == 1) disabled @endif"
+                                                    class="btn btn-primary @if ($data->status == 1) disabled @endif @if ($total_data_pilihan == 7) disabled @endif"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#exampleModal{{ $data->id }}">
                                                     Pesan
@@ -120,7 +133,7 @@
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Batal Memesan</button>
                                                     <button type="submit"
-                                                        class="btn btn-primary @if ($data->jam_awal <= date('H:i:s') && $data->jam_akhir >= date('H:i:s') && $hari_1 == $data->hari) disabled @endif">Pesan</button>
+                                                        class="btn btn-primary @if ($data->jam_awal <= date('H:i:s') && $data->jam_akhir >= date('H:i:s') && $hari_1 == $data->hari) disabled @endif @if ($total_data_pilihan == 7) disabled @endif">Pesan</button>
                                                 </div>
                                             </form>
                                         </div>
