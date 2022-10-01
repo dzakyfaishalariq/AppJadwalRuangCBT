@@ -70,13 +70,13 @@ class SystemController extends Controller
     {
         JatwalRuanganTersedia::where('id', (int)$request->jatwalruangantersedia_id)->update(['status' => 0]);
         $id->delete();
-        return redirect()->intended('/informasi_pilihan');
+        return redirect()->intended('/informasi_pilihan')->with(['pesan' => 'Data Sudah di hapus']);
     }
     public function update_keterangan(Request $request, RuanganPilihUser $id)
     {
         $id->keterangan = $request->keterangan;
         $id->save();
-        return redirect()->intended('/informasi_pilihan');
+        return redirect()->intended('/informasi_pilihan')->with(['pesan' => 'Keterangan Sudah di Ubah']);
     }
     public function tambah_data_user_admin(Request $request)
     {

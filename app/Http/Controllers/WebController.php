@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\History;
+use Illuminate\Http\Request;
 use App\Models\RuanganPilihUser;
+use Illuminate\Support\Facades\Auth;
 use App\Models\JatwalRuanganTersedia;
 
 class WebController extends Controller
@@ -45,7 +46,8 @@ class WebController extends Controller
     public function informasi_pilihan()
     {
         $title = 'Pilihan Anda';
-        return view('informasi_pilih', ['title' => $title]);
+        $data = RuanganPilihUser::where('user_id', Auth::user()->id)->paginate(4);
+        return view('informasi_pilih', ['title' => $title, 'data_pilihan' => $data]);
     }
     public function cetak_pilihan()
     {
