@@ -76,13 +76,14 @@
                                     </div>
                                 </div>
                             </form>
-
                             @php
                                 $no++;
                             @endphp
                         @endforeach
                     </tbody>
                 </table>
+                <hr>
+                {{ $data->links() }}
             </div>
         </div>
     </div>

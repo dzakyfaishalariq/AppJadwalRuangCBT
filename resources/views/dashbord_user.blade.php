@@ -34,7 +34,8 @@
         $total_data_pilihan = Auth::user()->ruanganpilihuser->count();
         $persentase = ($total_data_pilihan / 7) * 100;
     @endphp
-    <h6 class=" text-center text-white"><span class=" badge bg-danger">Maksimum Memilih 7 Jadwal</span></h6>
+    <h6 class=" text-center text-white"><span class=" badge bg-danger">Maksimum Memilih {{ $total_data_pilihan }}/7
+            Jadwal</span></h6>
     <div class="progress">
         <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning text-dark" role="progressbar"
             aria-label="Animated striped example" aria-valuenow="{{ $persentase }}" aria-valuemin="0" aria-valuemax="100"
@@ -57,7 +58,9 @@
                     @endphp
                     @for ($i = 0; $i < 7; $i++)
                         <tr>
-                            <td><span class=" badge text-bg-success">{{ $h[$i] }}</span></td>
+                            <td><span
+                                    class=" badge @if ($h[$i] == $hari_1) text-bg-success @endif">{{ $h[$i] }}</span>
+                            </td>
                             @foreach ($hari[$i] as $data)
                                 <td>
                                     <div class="card" style="width: 340px;">
@@ -113,6 +116,12 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
+                                                    <ul>
+                                                        <li>Sesi : {{ $data->sesi }}</li>
+                                                        <li>Jam : {{ $data->jam_awal }} - {{ $data->jam_akhir }}</li>
+                                                        <li>Hari : {{ $data->hari }}</li>
+                                                    </ul>
+                                                    <hr>
                                                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                                     <input type="hidden" name="prodi" value="{{ Auth::user()->prodi }}">
                                                     <input type="hidden" name="jatwalruangantersedia_id"
@@ -121,7 +130,18 @@
                                                     <input type="hidden" name="jam_awal" value="{{ $data->jam_awal }}">
                                                     <input type="hidden" name="jam_akhir" value="{{ $data->jam_akhir }}">
                                                     <input type="hidden" name="status" value="1">
-                                                    <textarea name="keterangan" id="editor{{ $data->id }}" cols="30" rows="10"></textarea>
+                                                    <label for="Isi_date">
+                                                        <div class=" alert alert-warning">
+                                                            Silahkan isi tanggal sesuai pemesanan hari ini
+                                                            atau minggu depan dan jangan masukan tanggal pada waktu yang
+                                                            sudah
+                                                            berlalu!
+                                                        </div>
+                                                    </label>
+                                                    <hr>
+                                                    <input type="date" name="tanggal_pemakaian"
+                                                        class=" form-control mb-2" id="Isi_date" required>
+                                                    <textarea name="keterangan" id="editor{{ $data->id }}" cols="30" rows="10" required></textarea>
                                                     <input type="hidden" name="tanggal_pesan" value="{{ date('Y-m-d') }}">
                                                     <input type="hidden" name="hari" value="{{ $data->hari }}">
                                                     <input type="hidden" name="acc" value="0">

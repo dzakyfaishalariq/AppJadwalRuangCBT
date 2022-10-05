@@ -24,6 +24,7 @@ return new class extends Migration
             $table->boolean('status');
             $table->boolean('acc');
             $table->date('tanggal_pesan');
+            $table->date('tanggal_pemakaian');
             $table->string('hari');
             $table->timestamps();
         });

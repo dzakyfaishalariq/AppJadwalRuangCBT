@@ -17,7 +17,7 @@
                                 <th>Sesi</th>
                                 <th>jam</th>
                                 <th>keterangan</th>
-                                <th>Tanggal Pesan</th>
+                                <th>Tanggal Pemakaian</th>
                                 <th>Hari</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
@@ -36,7 +36,7 @@
                                     <td>Ke-{{ $data->sesi }}</td>
                                     <td>{{ $data->jam_awal }}-{{ $data->jam_akhir }}</td>
                                     <td>{!! $data->keterangan !!}</td>
-                                    <td>{{ $data->tanggal_pesan }}</td>
+                                    <td>{{ $data->tanggal_pemakaian }}</td>
                                     <td>{{ $data->hari }}</td>
                                     <td>
                                         @if ($data->acc == '1')

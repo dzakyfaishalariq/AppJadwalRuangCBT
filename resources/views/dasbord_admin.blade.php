@@ -74,13 +74,36 @@
         <div class="col-xl-12 bg-warning rounded-3 mb-4 p-3 shadow-lg">
             <h3>History Pemilihan Rungan</h3>
             <hr>
+            @if (session('pesan'))
+                <div class=" alert alert-success">
+                    <p>{{ session('pesan') }}</p>
+                </div>
+            @endif
+            <form action="#" method="post">
+                @csrf
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <input type="text" class=" form-control">
+                            </div>
+                            <div class="col-xl-6">
+                                <button type="submit" class="btn btn-success">Cari</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <hr>
             <table class="table table-bordered table-striped table-light">
                 <thead>
                     <tr class=" text-center">
                         <th>No</th>
+                        <th>Nama pemesan</th>
                         <th>Hari</th>
-                        <th>Tanggal Pemesanan</th>
+                        <th>Tanggal Pemakaian</th>
                         <th>Jam</th>
+                        <th>keterangan</th>
                         <th>Prodi</th>
                     </tr>
                 </thead>
@@ -91,9 +114,11 @@
                     @foreach ($data_jumlah[3] as $data)
                         <tr>
                             <td>{{ $no }}</td>
+                            <td>{{ $data->user->nama }}</td>
                             <td>{{ $data->hari }}</td>
-                            <td>{{ $data->tanggal_pemesanan }}</td>
+                            <td>{{ $data->tanggal_pemakaian }}</td>
                             <td>{{ $data->jam_awal }} - {{ $data->jam_akhir }}</td>
+                            <td>{!! $data->keterangan !!}</td>
                             <td>{{ $data->prodi }}</td>
                         </tr>
                         @php
@@ -102,6 +127,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $data_jumlah[3]->links() }}
             <hr>
             <a href="/cetak_laporan_admin" target="blank" class="btn btn-info">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -112,6 +138,48 @@
                 </svg>
                 Cetak
             </a>
+            {{-- <a href="#" class="btn btn-danger">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-trash" viewBox="0 0 16 16">
+                    <path
+                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                    <path fill-rule="evenodd"
+                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                </svg>
+                Hapus Semua
+            </a> --}}
+            <button type="button" class="btn btn-danger" onclick="hapus()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-trash" viewBox="0 0 16 16">
+                    <path
+                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                    <path fill-rule="evenodd"
+                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                </svg>
+                Hapus Semua
+            </button>
         </div>
     </div>
+    <script>
+        function hapus() {
+            Swal.fire({
+                title: 'Apakah Kamu yakin?',
+                text: "Menghapus data History Semua nya!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location = "/hapus_data_history";
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                }
+            });
+        }
+    </script>
 @endsection

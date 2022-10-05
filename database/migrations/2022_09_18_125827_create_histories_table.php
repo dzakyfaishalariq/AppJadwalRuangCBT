@@ -19,8 +19,10 @@ return new class extends Migration
             $table->foreignId('jatwalruangantersedia_id');
             $table->string('hari');
             $table->date('tanggal_pemesanan');
+            $table->date('tanggal_pemakaian');
             $table->string('jam_awal');
             $table->string('jam_akhir');
+            $table->text('keterangan');
             $table->string('prodi');
             $table->timestamps();
         });

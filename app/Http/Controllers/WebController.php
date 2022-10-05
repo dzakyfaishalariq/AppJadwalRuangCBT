@@ -61,7 +61,7 @@ class WebController extends Controller
             User::all()->count(),
             JatwalRuanganTersedia::all()->count() - RuanganPilihUser::all()->count(),
             RuanganPilihUser::all()->count(),
-            History::latest()->get(),
+            History::latest()->with('user')->paginate(7),
         ];
         return view('dasbord_admin', ['title' => $title, 'data_jumlah' => $data_jumlah]);
     }
@@ -85,11 +85,11 @@ class WebController extends Controller
     {
         if (request()->has('cari')) {
             $title = "Manajemen Jatwal";
-            $data = JatwalRuanganTersedia::where('hari', 'LIKE', '%' . request('cari') . '%')->get();
+            $data = JatwalRuanganTersedia::where('hari', 'LIKE', '%' . request('cari') . '%')->paginate(5);
             return view('manajemen_jatwal', ['title' => $title, 'data' => $data]);
         } else {
             $title = "Manajemen Jatwal";
-            $data = JatwalRuanganTersedia::all();
+            $data = JatwalRuanganTersedia::paginate(7);
             return view('manajemen_jatwal', ['title' => $title, 'data' => $data]);
         }
     }

@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth:admin')->group(function () {
     Route::get('/dashboard_admin', [WebController::class, 'dashboard_admin']);
+    Route::get('/hapus_data_history', [SystemController::class, 'hapus_data_history']);
     Route::get('/manajemen_user', [WebController::class, 'manajemen_user']);
     Route::post('/manajemen_user_cari', [WebController::class, 'manajemen_user']);
     Route::post('/tambah_data_user_admin', [SystemController::class, 'tambah_data_user_admin']);

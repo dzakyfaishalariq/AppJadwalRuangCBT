@@ -38,6 +38,7 @@
                                             <th>Jam</th>
                                             <th>Keterangan</th>
                                             <th>Tanggal Pemesanan</th>
+                                            <th>Tanggal Pemakaian</th>
                                             <th>Hari</th>
                                             <th>Persetujuan</th>
                                             <th>Acc</th>
@@ -56,6 +57,7 @@
                                                 <td>{{ $c->jam_awal }} - {{ $c->jam_akhir }}</td>
                                                 <td>{!! $c->keterangan !!}</td>
                                                 <td>{{ $c->tanggal_pesan }}</td>
+                                                <td>{{ $c->tanggal_pemakaian }}</td>
                                                 <td>{{ $c->hari }}</td>
                                                 <td>
                                                     @if ($c->acc == 1)
@@ -83,6 +85,7 @@
                                                 <td>
                                                     <a href="/hapus_manajemen_pemesanan_{{ $c->id }}"
                                                         class=" btn btn-danger @if ($c->acc == '1') disabled @endif">Hapus</a>
+                                                    <button class="btn btn-warning">Edit</button>
                                                 </td>
                                             </tr>
                                             @php

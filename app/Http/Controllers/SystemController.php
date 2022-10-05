@@ -21,8 +21,10 @@ class SystemController extends Controller
         $history->jatwalruangantersedia_id = (int)$request->jatwalruangantersedia_id;
         $history->hari = $request->hari;
         $history->tanggal_pemesanan = $request->tanggal_pesan;
+        $history->tanggal_pemakaian = $request->tanggal_pemakaian;
         $history->jam_awal = $request->jam_awal;
         $history->jam_akhir = $request->jam_akhir;
+        $history->keterangan = $request->keterangan;
         $history->prodi = $request->prodi;
         $nilai2 = $history->save();
         //data untuk RuanganPilihUser
@@ -37,6 +39,7 @@ class SystemController extends Controller
             'status' => 'required|boolean',
             'acc' => 'required|boolean',
             'tanggal_pesan' => 'required',
+            'tanggal_pemakaian' => 'required',
             'hari' => 'required',
         ];
         $text = [
@@ -45,7 +48,7 @@ class SystemController extends Controller
         $validasi = Validator::make($request->all(), $rules, $text);
         // digunakan untuk antisipasi nantinya dalam memilih jatwal yang tertindih di dalam system
         if ($validasi->fails()) {
-            return redirect()->intended('/dashbord')->with('pesan', $validasi->errors()->first());
+            return redirect()->intended('/dashbord')->with('error', $validasi->errors()->first());
         }
         $data->user_id = (int)$request->user_id;
         $data->jatwalruangantersedia_id = (int)$request->jatwalruangantersedia_id;
@@ -56,6 +59,7 @@ class SystemController extends Controller
         $data->status = (bool)$request->status;
         $data->acc = (bool)$request->acc;
         $data->tanggal_pesan = $request->tanggal_pesan;
+        $data->tanggal_pemakaian = $request->tanggal_pemakaian;
         $data->hari = $request->hari;
         $nilai = $data->save();
         //data untuk jatwal_ruangan_tersedias
@@ -186,5 +190,13 @@ class SystemController extends Controller
             $d->delete();
         }
         return redirect()->intended('/manajemen_pemesanan');
+    }
+    public function hapus_data_history()
+    {
+        $data = History::latest()->get();
+        foreach ($data as $d) {
+            $d->delete();
+        }
+        return redirect()->intended('/dashboard_admin')->with('pesan', 'Data berhasil di hapus');
     }
 }

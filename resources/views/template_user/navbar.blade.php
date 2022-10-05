@@ -1,3 +1,31 @@
+@php
+date_default_timezone_set('Asia/Jakarta');
+@endphp
+@php
+switch (date('l')) {
+    case 'Monday':
+        $hari_2 = 'Senin';
+        break;
+    case 'Tuesday':
+        $hari_2 = 'Selasa';
+        break;
+    case 'Wednesday':
+        $hari_2 = 'Rabu';
+        break;
+    case 'Thursday':
+        $hari_2 = 'Kamis';
+        break;
+    case 'Friday':
+        $hari_2 = 'Jumat';
+        break;
+    case 'Saturday':
+        $hari_2 = 'Sabtu';
+        break;
+    case 'Sunday':
+        $hari_2 = 'Minggu';
+        break;
+}
+@endphp
 <nav class="navbar navbar-expand-lg bg-saya">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
@@ -22,6 +50,9 @@
                         </button>
                         <button type="button" class="btn btn-outline-primary">
                             <div id="detik"></div>
+                        </button>
+                        <button type="button" class="btn btn-outline-primary">
+                            {{ $hari_2 }}
                         </button>
                     </div>
                 </li>
