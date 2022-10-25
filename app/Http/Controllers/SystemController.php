@@ -176,6 +176,12 @@ class SystemController extends Controller
         $id->delete();
         return redirect()->intended('/manajemen_pemesanan');
     }
+    public function edit_manajemen_pemesanan(Request $request, RuanganPilihUser $id)
+    {
+        $id->keterangan = $request->keterangan;
+        $id->save();
+        return redirect()->intended('/manajemen_pemesanan');
+    }
     public function perbarui_jam(Request $request, JatwalRuanganTersedia $id)
     {
         $id->jam_awal = $request->jam_awal;

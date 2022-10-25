@@ -2,7 +2,8 @@
     <div class="position-sticky pt-3 sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link btn btn-outline-primary mb-2" aria-current="page" href="/dashboard_admin">
+                <a class="nav-link btn @if ($title == 'Admin') btn-primary text-white @else btn-light @endif mb-2"
+                    aria-current="page" href="/dashboard_admin">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-house" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
@@ -15,7 +16,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link btn btn-outline-primary mb-2" href="/manajemen_user">
+                <a class="nav-link btn @if ($title == 'Manajemen User') btn-primary text-white @else btn-light @endif mb-2"
+                    href="/manajemen_user">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-people" viewBox="0 0 16 16">
                         <path
@@ -26,7 +28,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  btn btn-outline-primary mb-2" href="/manajemen_pemesanan">
+                <a class="nav-link  btn @if ($title == 'Manajemen pemesanan') btn-primary text-white @else btn-light @endif mb-2"
+                    href="/manajemen_pemesanan">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-cart2" viewBox="0 0 16 16">
                         <path
@@ -37,7 +40,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link btn btn-outline-primary mb-2" href="/manajemen_jatwal">
+                <a class="nav-link btn @if ($title == 'Manajemen Jatwal') btn-primary text-white @else btn-light @endif mb-2"
+                    href="/manajemen_jatwal">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-calendar" viewBox="0 0 16 16">
                         <path
@@ -48,7 +52,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link btn btn-outline-primary mb-2" href="/grafik_laporan">
+                {{-- Gerafik laporan --}}
+                <a class="nav-link btn @if ($title == 'Gerafik laporan') btn-primary text-white @else btn-light @endif mb-2"
+                    href="/grafik_laporan">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-bar-chart" viewBox="0 0 16 16">
                         <path
@@ -59,7 +65,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link btn btn-outline-primary mb-2" href="/logout_admin">
+                <a class="nav-link btn btn-light mb-2" href="/logout_admin">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-box-arrow-left" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"

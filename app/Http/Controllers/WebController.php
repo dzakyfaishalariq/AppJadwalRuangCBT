@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\RuanganPilihUser;
 use Illuminate\Support\Facades\Auth;
 use App\Models\JatwalRuanganTersedia;
+// use App\Http\logikal;
 
 class WebController extends Controller
 {
@@ -54,16 +55,26 @@ class WebController extends Controller
         $title = "Cetak Laporan";
         return view('cetak_laporan', ['title' => $title]);
     }
-    public function dashboard_admin()
+    public function dashboard_admin(Request $request)
     {
         $title = "Admin";
+        $cari_history = $request->cari_history;
+        if (request()->has('cari_history')) {
+            $data_history = History::where('hari', 'LIKE', '%' . $request->cari_history . '%')
+                ->orWhere('tanggal_pemakaian', 'LIKE', '%' . $request->cari_history . '%')
+                ->orWhere('prodi', 'LIKE', '%' . $request->cari_history . '%')
+                ->with('user')
+                ->paginate(5);
+        } else {
+            $data_history = History::latest()->with('user')->paginate(5);
+        }
         $data_jumlah = [
             User::all()->count(),
             JatwalRuanganTersedia::all()->count() - RuanganPilihUser::all()->count(),
             RuanganPilihUser::all()->count(),
-            History::latest()->with('user')->paginate(7),
+            $data_history
         ];
-        return view('dasbord_admin', ['title' => $title, 'data_jumlah' => $data_jumlah]);
+        return view('dasbord_admin', ['cari_history' => $cari_history, 'title' => $title, 'data_jumlah' => $data_jumlah]);
     }
     public function manajemen_user()
     {
@@ -93,10 +104,18 @@ class WebController extends Controller
             return view('manajemen_jatwal', ['title' => $title, 'data' => $data]);
         }
     }
-    public function cetak_laporan_admin()
+    public function cetak_laporan_admin($cari)
     {
         $title = "Cetak Laporan Admin";
-        $data = History::all();
+        if ($cari != 'all') {
+            $data = History::where('hari', 'LIKE', '%' . $cari . '%')
+                ->orWhere('tanggal_pemakaian', 'LIKE', '%' . $cari . '%')
+                ->orWhere('prodi','LIKE','%'.$cari.'%')
+                ->with('user')
+                ->get();
+        } else {
+            $data = History::latest()->get();
+        }
         return view('cetak_laporan_admin', ['title' => $title, 'data' => $data]);
     }
     public function grafik_laporan()

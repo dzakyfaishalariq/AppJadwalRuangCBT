@@ -1,5 +1,6 @@
 @extends('template_admin.main')
 @section('content')
+    <script src="//cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
     <hr>
     <div class=" mb-1 p-2 bg-info rounded-3 shadow-lg">
         <h4 class=" text-center">{{ $title }}</h4>
@@ -85,7 +86,16 @@
                                                 <td>
                                                     <a href="/hapus_manajemen_pemesanan_{{ $c->id }}"
                                                         class=" btn btn-danger @if ($c->acc == '1') disabled @endif">Hapus</a>
-                                                    <button class="btn btn-warning">Edit</button>
+                                                    {{-- <button class="btn btn-warning">Edit</button> --}}
+                                                    {{-- <a href="/edit_manajemen_pemesanan_{{ $c->id }}"
+                                                        class=" btn btn-warning @if ($c->acc == '1') disabled @endif">Edit</a> --}}
+                                                    <!-- Button trigger modal -->
+                                                    {{-- <button type="button"
+                                                        class="btn btn-warning @if ($c->acc == '1') disabled @endif"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#area_keterangan{{ $c->id }}">
+                                                        Edit
+                                                    </button> --}}
                                                 </td>
                                             </tr>
                                             @php
