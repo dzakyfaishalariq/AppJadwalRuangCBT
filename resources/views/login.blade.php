@@ -33,8 +33,10 @@
                         <form action="/login" method="post">
                             @csrf
                             <div class="form-group mb-3">
-                                <input type="email" class="form-control text-center" placeholder="exampel@gmail.com"
+                                <input type="email" class="form-control text-center" placeholder="Username"
                                     name="email" required>
+                                <div id="emailHelp" class="form-text text-center"> username : exampel@gmail.com
+                                </div>
                             </div>
                             <div class="form-group mb-3">
                                 <input type="password" class="form-control text-center" placeholder="Password"
