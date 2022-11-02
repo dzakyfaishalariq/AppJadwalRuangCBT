@@ -128,6 +128,7 @@ class SystemController extends Controller
             'prodi' => 'required',
             'nama' => 'required',
             'tingkat' => 'required|integer',
+            'username' => 'required',
             'email' => 'email:rfc,dns',
             'password' => 'required'
         ];
@@ -135,6 +136,7 @@ class SystemController extends Controller
             'prodi.required' => 'Data tidak boleh kosong',
             'nama.required' => 'Data tidak boleh kosong',
             'tingkat.required' => 'Data tidak boleh kosong',
+            'username.required' => 'Data tidak boleh kosong',
             'email.required' => 'Data tidak boleh kosong',
             'email.email' => 'Buat email yang benar',
             'password.required' => 'Data tidak boleh kosong',
@@ -146,6 +148,7 @@ class SystemController extends Controller
         $id->prodi = $request->prodi;
         $id->nama = $request->nama;
         $id->tingkat = (int)$request->tingkat;
+        $id->username = $request->username;
         $id->email = $request->email;
         $id->password = bcrypt($request->password);
         $nilai = $id->save();
