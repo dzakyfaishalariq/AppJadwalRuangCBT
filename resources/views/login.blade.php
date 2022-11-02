@@ -10,6 +10,11 @@
     <link rel="shortcut icon" href="img/Icon_plk.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <title>PLK|{{ $title }}</title>
+    <style>
+        .form-text {
+            font-size: 11px !important;
+        }
+    </style>
     @vite([])
 </head>
 
@@ -33,10 +38,8 @@
                         <form action="/login" method="post">
                             @csrf
                             <div class="form-group mb-3">
-                                <input type="email" class="form-control text-center" placeholder="Username"
-                                    name="email" required>
-                                <div id="emailHelp" class="form-text text-center"> username : exampel@gmail.com
-                                </div>
+                                <input type="text" class="form-control text-center" placeholder="Username"
+                                    name="username" required>
                             </div>
                             <div class="form-group mb-3">
                                 <input type="password" class="form-control text-center" placeholder="Password"

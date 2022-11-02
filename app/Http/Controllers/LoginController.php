@@ -17,6 +17,7 @@ class LoginController extends Controller
             'prodi' => 'required',
             'nama' => 'required',
             'tingkat' => 'required|integer',
+            'username' => 'required',
             'email' => 'email:rfc,dns',
             'password' => 'required'
         ];
@@ -24,6 +25,7 @@ class LoginController extends Controller
             'prodi.required' => 'Data tidak boleh kosong',
             'nama.required' => 'Data tidak boleh kosong',
             'tingkat.required' => 'Data tidak boleh kosong',
+            'username.required' => 'Data tidak boleh kosong',
             'email.required' => 'Data tidak boleh kosong',
             'email.email' => 'Buat email yang benar',
             'password.required' => 'Data tidak boleh kosong',
@@ -35,6 +37,7 @@ class LoginController extends Controller
         $data->prodi = $request->prodi;
         $data->nama = $request->nama;
         $data->tingkat = (int)$request->tingkat;
+        $data->username = $request->username;
         $data->email = $request->email;
         $data->password = bcrypt($request->password);
         $nilai = $data->save();
@@ -48,7 +51,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $validasi = $request->validate([
-            'email' => 'required|email:dns',
+            'username' => 'required',
             'password' => 'required',
         ]);
         if (Auth::attempt($validasi)) {

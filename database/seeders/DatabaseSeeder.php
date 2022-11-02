@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             'prodi' => 'Fakultas Keperawatan',
             'nama' => 'Budi Setiyawan',
             'tingkat' => 1,
+            'username' => 'budi234',
             'email' => 'budi@gmail.com',
             'password' => bcrypt('budi12345'),
         ]);
@@ -34,6 +35,7 @@ class DatabaseSeeder extends Seeder
             'prodi' => 'STR Kebidanan',
             'nama' => 'Erlin Kurnia',
             'tingkat' => 2,
+            'username' => 'erlin123',
             'email' => 'Erlin@gmail.com',
             'password' => bcrypt('Erlin12345'),
         ]);
@@ -41,6 +43,7 @@ class DatabaseSeeder extends Seeder
             'prodi' => 'D3 Gizi',
             'nama' => 'Andi Gustiyo',
             'tingkat' => 4,
+            'username' => 'Andi123',
             'email' => 'Andi@gmail.com',
             'password' => bcrypt('Andi12345'),
         ]);
@@ -48,6 +51,7 @@ class DatabaseSeeder extends Seeder
         // admin
 
         Admin::create([
+            'username' => 'admin123',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin12345'),
         ]);

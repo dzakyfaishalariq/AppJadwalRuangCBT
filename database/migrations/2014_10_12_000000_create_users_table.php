@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('prodi');
             $table->string('nama');
             $table->integer('tingkat');
+            $table->string('username');
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
