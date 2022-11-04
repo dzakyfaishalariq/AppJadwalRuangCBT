@@ -78,6 +78,7 @@ class SystemController extends Controller
     }
     public function update_keterangan(Request $request, RuanganPilihUser $id)
     {
+        $id->tanggal_pemakaian = $request->tanggal_pemakaian;
         $id->keterangan = $request->keterangan;
         $id->save();
         return redirect()->intended('/informasi_pilihan')->with(['pesan' => 'Keterangan Sudah di Ubah']);

@@ -96,8 +96,11 @@
                                                             <h5 class="card-title">Edit Keterangan Anda</h5>
                                                             <hr>
                                                             {{-- <input type="hidden" name="no" --}}
+                                                            <input class="form-control" type="date"
+                                                                name="tanggal_pemakaian"
+                                                                value="{{ $data->tanggal_pemakaian }}" required>
                                                             {{-- value="{{ $i }}"> --}}
-                                                            <textarea name="keterangan" id="editor{{ $data->id }}" cols="30" rows="10"></textarea>
+                                                            <textarea name="keterangan" id="editor{{ $data->id }}" cols="30" rows="10">{!! $data->keterangan !!}</textarea>
                                                         </div>
                                                         <script>
                                                             CKEDITOR.replace('editor{{ $data->id }}')
