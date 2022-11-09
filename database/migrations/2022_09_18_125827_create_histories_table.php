@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('jatwalruangantersedia_id');
+            $table->string('kode');
             $table->string('hari');
             $table->date('tanggal_pemesanan');
             $table->date('tanggal_pemakaian');

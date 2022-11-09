@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('jatwalruangantersedia_id')->unique();
+            $table->string('kode');
             $table->integer('sesi');
             $table->time('jam_awal');
             $table->time('jam_akhir');

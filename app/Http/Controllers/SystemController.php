@@ -12,13 +12,27 @@ use Illuminate\Support\Facades\Validator;
 
 class SystemController extends Controller
 {
+    //prifat fungsi
+    private function kodeString($input, $strngth)
+    {
+        $input_length = strlen($input);
+        $random_string = '';
+        for ($i = 0; $i < $strngth; $i++) {
+            $random_character = $input[mt_rand(0, $input_length - 1)];
+            $random_string .= $random_character;
+        }
+
+        return $random_string;
+    }
     //pesanan ruangan user
     public function pesan(Request $request)
     {
         //sambilan memasukan data history
+        $koderand = SystemController::kodeString('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 10);
         $history = new History;
         $history->user_id = (int)$request->user_id;
         $history->jatwalruangantersedia_id = (int)$request->jatwalruangantersedia_id;
+        $history->kode = $koderand;
         $history->hari = $request->hari;
         $history->tanggal_pemesanan = $request->tanggal_pesan;
         $history->tanggal_pemakaian = $request->tanggal_pemakaian;
@@ -52,6 +66,7 @@ class SystemController extends Controller
         }
         $data->user_id = (int)$request->user_id;
         $data->jatwalruangantersedia_id = (int)$request->jatwalruangantersedia_id;
+        $data->kode = $koderand;
         $data->sesi = $request->sesi;
         $data->jam_awal = $request->jam_awal;
         $data->jam_akhir = $request->jam_akhir;
@@ -81,6 +96,12 @@ class SystemController extends Controller
         $id->tanggal_pemakaian = $request->tanggal_pemakaian;
         $id->keterangan = $request->keterangan;
         $id->save();
+        //melakukan update history
+        $history = History::where('kode', $id->kode);
+        $history->update([
+            'tanggal_pemakaian' => $request->tanggal_pemakaian,
+            'keterangan' => $request->keterangan
+        ]);
         return redirect()->intended('/informasi_pilihan')->with(['pesan' => 'Keterangan Sudah di Ubah']);
     }
     public function tambah_data_user_admin(Request $request)

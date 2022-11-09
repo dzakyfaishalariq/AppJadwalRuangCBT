@@ -35,11 +35,19 @@
                                     aria-label="Close"></button>
                             </div>
                         @endif
+                        @error('username')
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ $message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @enderror
                         <form action="/login" method="post">
                             @csrf
                             <div class="form-group mb-3">
-                                <input type="text" class="form-control text-center" placeholder="Username"
-                                    name="username" required>
+                                <input type="text"
+                                    class="form-control text-center @error('username') is-invalid @enderror"
+                                    placeholder="Username" name="username" required value="{{ old('username') }}">
                             </div>
                             <div class="form-group mb-3">
                                 <input type="password" class="form-control text-center" placeholder="Password"

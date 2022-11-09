@@ -51,7 +51,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $validasi = $request->validate([
-            'username' => 'required',
+            'username' => 'required|min:3',
             'password' => 'required',
         ]);
         if (Auth::attempt($validasi)) {
