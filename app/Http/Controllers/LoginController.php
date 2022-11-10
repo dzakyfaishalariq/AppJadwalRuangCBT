@@ -13,27 +13,35 @@ class LoginController extends Controller
     public function registrasi_system(Request $request)
     {
         $data = new User;
-        $rules = [
-            'prodi' => 'required',
-            'nama' => 'required',
+        // $rules = [
+        //     'prodi' => 'required',
+        //     'nama' => 'required',
+        //     'tingkat' => 'required|integer',
+        //     'username' => 'required',
+        //     'email' => 'email:rfc,dns',
+        //     'password' => 'required'
+        // ];
+        // $text = [
+        //     'prodi.required' => 'Data tidak boleh kosong',
+        //     'nama.required' => 'Data tidak boleh kosong',
+        //     'tingkat.required' => 'Data tidak boleh kosong',
+        //     'username.required' => 'Data tidak boleh kosong',
+        //     'email.required' => 'Data tidak boleh kosong',
+        //     'email.email' => 'Buat email yang benar',
+        //     'password.required' => 'Data tidak boleh kosong',
+        // ];
+        // $validasi = Validator::make($request->all(), $rules, $text);
+        // if ($validasi->fails()) {
+        //     return redirect()->intended('/registrasi')->with('pesan', $validasi->errors()->first());
+        // }
+        $request->validate([
+            'prodi' => 'required|string|min:4',
+            'nama' => 'required|string|min:4',
             'tingkat' => 'required|integer',
-            'username' => 'required',
-            'email' => 'email:rfc,dns',
-            'password' => 'required'
-        ];
-        $text = [
-            'prodi.required' => 'Data tidak boleh kosong',
-            'nama.required' => 'Data tidak boleh kosong',
-            'tingkat.required' => 'Data tidak boleh kosong',
-            'username.required' => 'Data tidak boleh kosong',
-            'email.required' => 'Data tidak boleh kosong',
-            'email.email' => 'Buat email yang benar',
-            'password.required' => 'Data tidak boleh kosong',
-        ];
-        $validasi = Validator::make($request->all(), $rules, $text);
-        if ($validasi->fails()) {
-            return redirect()->intended('/registrasi')->with('pesan', $validasi->errors()->first());
-        }
+            'username' => 'required|min:4',
+            'email' => 'required|email:rfc,dns',
+            'password' => 'required|min:6'
+        ]);
         $data->prodi = $request->prodi;
         $data->nama = $request->nama;
         $data->tingkat = (int)$request->tingkat;

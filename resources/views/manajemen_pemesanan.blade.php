@@ -87,8 +87,8 @@
                                                     <a href="/hapus_manajemen_pemesanan_{{ $c->id }}"
                                                         class=" btn btn-danger @if ($c->acc == '1') disabled @endif">Hapus</a>
                                                     {{-- <button class="btn btn-warning">Edit</button> --}}
-                                                    {{-- <a href="/edit_manajemen_pemesanan_{{ $c->id }}"
-                                                        class=" btn btn-warning @if ($c->acc == '1') disabled @endif">Edit</a> --}}
+                                                    <a href="/edit_manajemen_pemesanan_{{ $c->id }}"
+                                                        class=" btn btn-warning @if ($c->acc == '1') disabled @endif">Edit</a>
                                                     <!-- Button trigger modal -->
                                                     {{-- <button type="button"
                                                         class="btn btn-warning @if ($c->acc == '1') disabled @endif"

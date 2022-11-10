@@ -17,26 +17,33 @@
         <div class="row">
             <div class=" col-md-4 offset-md-4">
                 <div class="card m-5 shadow-lg bg-body animate__animated animate__bounceIn">
-                    @if (session('pesan'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ session('pesan') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                aria-label="Close"></button>
-                        </div>
-                    @endif
                     <div class=" card-header text-center bg-info">
                         <h3>Registrasi</h3>
                     </div>
                     <div class="card-body">
                         <form action="/registrasi_system" method="post">
                             @csrf
-                            <div class="form-group mb-3">
-                                <input type="text" class="form-control text-center" placeholder="Prodi"
-                                    name="prodi" required>
+                            <div class=" form-group mb-3">
+                                <input type="text"
+                                    class="form-control @error('prodi') is-invalid  @enderror text-center"
+                                    id="validationServer03" aria-describedby="validationServer03Feedback"
+                                    placeholder="Prodi" name="prodi" value="{{ old('prodi') }}" required>
+                                @error('prodi')
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <input type="text" class="form-control text-center" placeholder="Nama" name="nama"
-                                    required>
+                                <input type="text"
+                                    class="form-control @error('nama') is-invalid  @enderror text-center"
+                                    id="validationServer03" aria-describedby="validationServer03Feedback"
+                                    placeholder="Nama" name="nama" value="{{ old('nama') }}" required>
+                                @error('nama')
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <div class="row">
@@ -70,16 +77,38 @@
                                 </div>
                             </div>
                             <div class="form-group mb-3">
-                                <input type="text" class="form-control text-center" placeholder="Username"
-                                    name="username" required>
+                                <input type="text"
+                                    class="form-control @error('username') is-invalid  @enderror text-center"
+                                    id="validationServer03" aria-describedby="validationServer03Feedback"
+                                    placeholder="Username" name="username" value="{{ old('username') }}" required>
+                                @error('username')
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <input type="email" class="form-control text-center" placeholder="exampel@gmail.com"
-                                    name="email" required>
+                                <input type="email"
+                                    class="form-control @error('email') is-invalid  @enderror text-center"
+                                    id="validationServer03" aria-describedby="validationServer03Feedback"
+                                    placeholder="exampel@gmail.com" name="email" value="{{ old('email') }}"
+                                    required>
+                                @error('email')
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <input type="password" class="form-control text-center" placeholder="Password"
-                                    name="password" required>
+                                <input type="password"
+                                    class="form-control @error('password') is-invalid  @enderror text-center"
+                                    id="validationServer03" aria-describedby="validationServer03Feedback"
+                                    placeholder="Password" name="password" value="{{ old('password') }}" required>
+                                @error('password')
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div class="d-flex flex-row-reverse">
                                 <a href="/" class="btn btn-warning btn-lg">Kembali</a>

@@ -203,8 +203,24 @@ class SystemController extends Controller
     }
     public function edit_manajemen_pemesanan(Request $request, RuanganPilihUser $id)
     {
-        $id->keterangan = $request->keterangan;
-        $id->save();
+        // $id->keterangan = $request->keterangan;
+        // $id->save();
+        // return redirect()->intended('/manajemen_pemesanan');
+        $title = "Edit Pemesanan";
+        return view('edit_manajemen_pemesanan', ['title' => $title, 'data' => $id]);
+    }
+    public function update_manajemen_pemesanan(Request $request)
+    {
+        $data = RuanganPilihUser::where('id', $request->id);
+        $data->update([
+            'tanggal_pemakaian' => $request->tanggal_pemakaian,
+            'keterangan' => $request->keterangan
+        ]);
+        $data2 = History::where('kode', $request->kode);
+        $data2->update([
+            'tanggal_pemakaian' => $request->tanggal_pemakaian,
+            'keterangan' => $request->keterangan
+        ]);
         return redirect()->intended('/manajemen_pemesanan');
     }
     public function perbarui_jam(Request $request, JatwalRuanganTersedia $id)

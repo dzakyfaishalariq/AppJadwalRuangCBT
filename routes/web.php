@@ -46,7 +46,8 @@ Route::middleware('auth:admin')->group(function () {
     Route::post('/manajemen_pemesanan_acc', [SystemController::class, 'manajemen_pemesanan_acc']);
     Route::get('/hapus_manajemen_pemesanan_{id}', [SystemController::class, 'hapus_manajemen_pemesanan']);
     Route::get('/reset_pemesanan_{id}', [SystemController::class, 'reset_pemesanan']);
-    Route::put('/edit_manajemen_pemesanan_{id}', [SystemController::class, 'edit_manajemen_pemesanan']);
+    Route::get('/edit_manajemen_pemesanan_{id}', [SystemController::class, 'edit_manajemen_pemesanan']);
+    Route::put('/update_manajemen_pemesanan', [SystemController::class, 'update_manajemen_pemesanan']);
     Route::get('/manajemen_jatwal', [WebController::class, 'manajemen_jatwal']);
     Route::post('/manajemen_jatwal_cari', [WebController::class, 'manajemen_jatwal']);
     Route::put('/perbarui_jam_{id}', [SystemController::class, 'perbarui_jam']);
