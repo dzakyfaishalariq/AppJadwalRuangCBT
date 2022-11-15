@@ -35,12 +35,22 @@ class LoginController extends Controller
         //     return redirect()->intended('/registrasi')->with('pesan', $validasi->errors()->first());
         // }
         $request->validate([
-            'prodi' => 'required|string|min:4',
-            'nama' => 'required|string|min:4',
+            #prodi hanya menerima huruf, titik dan spasi
+            'prodi' => 'required|regex:/^[a-zA-Z\s.]+$/|string|min:4',
+            // 'prodi' => 'required|string|min:4',
+            #nama hanya menerima huruf, spasi
+            'nama' => 'required|regex:/^[a-zA-Z\s]+$/|string|min:4',
+            // 'nama' => 'required|string|min:4',
             'tingkat' => 'required|integer',
-            'username' => 'required|min:4',
-            'email' => 'required|email:rfc,dns',
-            'password' => 'required|min:6'
+            // username hanya menerima huruf,angka
+            'username' => 'required|regex:/^[a-zA-Z0-9]+$/|string|min:4',
+            // 'username' => 'required|min:4',
+            //email hanya menerima email yang benar, huruf, angka, titik, dan underscore
+            'email' => 'required|email:rfc,dns|regex:/^[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-zA-Z0-9.]+$/|string|min:4',
+            // 'email' => 'required|email:rfc,dns',
+            //password hanya menerima huruf, angka, titik, dan underscore
+            'password' => 'required|regex:/^[a-zA-Z0-9._]+$/|string|min:6',
+            // 'password' => 'required|min:6'
         ]);
         $data->prodi = $request->prodi;
         $data->nama = $request->nama;
