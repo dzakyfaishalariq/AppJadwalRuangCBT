@@ -69,8 +69,8 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $validasi = $request->validate([
-            'username' => 'required|min:3',
-            'password' => 'required',
+            'username' => 'required|regex:/^[a-zA-Z0-9]+$/|string|min:4',
+            'password' => 'required|regex:/^[a-zA-Z0-9._]+$/|string|min:6',
         ]);
         if (Auth::attempt($validasi)) {
             $request->session()->regenerate();

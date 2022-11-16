@@ -24,7 +24,7 @@
             <div class=" col-md-4 offset-md-4">
                 <div class="card m-5 shadow-lg bg-body animate__animated animate__bounceIn">
                     <div class=" card-header text-center bg-info">
-                        <img src="img/Logo_Poltekes.jpg" class=" rounded-2" width="80px" alt="gambar Logo Poltekes">
+                        <img src="img/Logo Poltekkes Kemenkes Bengkulu.png" class=" rounded-2" width="200px" alt="gambar Logo Poltekes">
                         <h4 class=" text-white">PLK</h4>
                     </div>
                     <div class="card-body">
