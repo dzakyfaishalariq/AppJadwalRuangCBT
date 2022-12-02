@@ -77,7 +77,8 @@ class LoginController extends Controller
             return redirect()->intended('/dashbord');
         } else if (Auth::guard('admin')->attempt($validasi)) {
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard_admin');
+            // return redirect()->intended('/dashboard_admin');
+            return redirect('/dashboard_admin');
         }
         return back()->with('pesan', 'maaf username dan password anda salah');
     }
@@ -87,13 +88,13 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->intended('/');
+        return redirect('/');
     }
     public function logout_admin(Request $request)
     {
         Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->intended('/');
+        return redirect('/');
     }
 }

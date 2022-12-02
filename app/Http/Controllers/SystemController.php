@@ -102,7 +102,7 @@ class SystemController extends Controller
             'tanggal_pemakaian' => $request->tanggal_pemakaian,
             'keterangan' => $request->keterangan
         ]);
-        return redirect()->intended('/informasi_pilihan')->with(['pesan' => 'Keterangan Sudah di Ubah']);
+        return redirect('/informasi_pilihan')->with(['pesan' => 'Keterangan Sudah di Ubah']);
     }
     public function tambah_data_user_admin(Request $request)
     {
@@ -111,6 +111,7 @@ class SystemController extends Controller
             'prodi' => 'required',
             'nama' => 'required',
             'tingkat' => 'required|integer',
+            'username' => 'required',
             'email' => 'required|email:rfc,dns|unique:users',
             'password' => 'required'
         ];
@@ -118,6 +119,7 @@ class SystemController extends Controller
             'prodi.required' => 'Data tidak boleh kosong',
             'nama.required' => 'Data tidak boleh kosong',
             'tingkat.required' => 'Data tidak boleh kosong',
+            'username.required' => 'Data tidak boleh kosong',
             'email.required' => 'Data tidak boleh kosong',
             'email.email' => 'Buat email yang benar',
             'email.unique' => 'Email sudah ada yang punya harap isi lagi data dan gunakan email lainnya',
@@ -125,24 +127,25 @@ class SystemController extends Controller
         ];
         $validasi = Validator::make($request->all(), $rules, $text);
         if ($validasi->fails()) {
-            return redirect()->intended('/manajemen_user')->with('error', $validasi->errors()->first());
+            return redirect('/manajemen_user')->with('error', $validasi->errors()->first());
         }
         $data->prodi = $request->prodi;
         $data->nama = $request->nama;
         $data->tingkat = (int)$request->tingkat;
+        $data->username = $request->username;
         $data->email = $request->email;
         $data->password = bcrypt($request->password);
         $nilai = $data->save();
         if ($nilai) {
-            return redirect()->intended('/manajemen_user')->with('pesan', 'Data terkirim');
+            return redirect('/manajemen_user')->with('pesan', 'Data terkirim');
         } else {
-            return redirect()->intended('/manajemen_user')->with('error', 'Data Belum Terkirim');
+            return redirect('/manajemen_user')->with('error', 'Data Belum Terkirim');
         }
     }
     public function hapus_data_user(User $id)
     {
         $id->delete();
-        return redirect()->intended('/manajemen_user');
+        return redirect('/manajemen_user');
     }
     public function update_data_user_admin(Request $request, User $id)
     {
@@ -165,7 +168,7 @@ class SystemController extends Controller
         ];
         $validasi = Validator::make($request->all(), $rules, $text);
         if ($validasi->fails()) {
-            return redirect()->intended('/manajemen_user')->with('error', $validasi->errors()->first());
+            return redirect('/manajemen_user')->with('error', $validasi->errors()->first());
         }
         $id->prodi = $request->prodi;
         $id->nama = $request->nama;
@@ -175,9 +178,10 @@ class SystemController extends Controller
         $id->password = bcrypt($request->password);
         $nilai = $id->save();
         if ($nilai) {
-            return redirect()->intended('/manajemen_user')->with('pesan', 'Data Berhasil Di edit!');
+            // return redirect()->intended('/manajemen_user')->with('pesan', 'Data Berhasil Di edit!');
+            return redirect('/manajemen_user')->with('pesan', 'Data Berhasil Di edit!');
         } else {
-            return redirect()->intended('/manajemen_user')->with('error', 'Data Belum Teredit!');
+            return redirect('/manajemen_user')->with('error', 'Data Belum Teredit!');
         }
     }
     public function manajemen_pemesanan_acc(Request $request)
@@ -193,13 +197,13 @@ class SystemController extends Controller
                 $d->save();
             }
         }
-        return redirect()->intended('/manajemen_pemesanan');
+        return redirect('/manajemen_pemesanan');
     }
     public function hapus_manajemen_pemesanan(Request $request, RuanganPilihUser $id)
     {
         JatwalRuanganTersedia::where('id', $id->jatwalruangantersedia_id)->update(['status' => 0]);
         $id->delete();
-        return redirect()->intended('/manajemen_pemesanan');
+        return redirect('/manajemen_pemesanan');
     }
     public function edit_manajemen_pemesanan(Request $request, RuanganPilihUser $id)
     {
@@ -221,14 +225,14 @@ class SystemController extends Controller
             'tanggal_pemakaian' => $request->tanggal_pemakaian,
             'keterangan' => $request->keterangan
         ]);
-        return redirect()->intended('/manajemen_pemesanan');
+        return redirect('/manajemen_pemesanan');
     }
     public function perbarui_jam(Request $request, JatwalRuanganTersedia $id)
     {
         $id->jam_awal = $request->jam_awal;
         $id->jam_akhir = $request->jam_akhir;
         $id->save();
-        return redirect()->intended('/manajemen_jatwal');
+        return redirect('/manajemen_jatwal');
     }
     public function reset_pemesanan(User $id)
     {
@@ -236,7 +240,7 @@ class SystemController extends Controller
             JatwalRuanganTersedia::where('id', $d->jatwalruangantersedia_id)->update(['status' => 0]);
             $d->delete();
         }
-        return redirect()->intended('/manajemen_pemesanan');
+        return redirect('/manajemen_pemesanan');
     }
     public function hapus_data_history()
     {
@@ -244,6 +248,6 @@ class SystemController extends Controller
         foreach ($data as $d) {
             $d->delete();
         }
-        return redirect()->intended('/dashboard_admin')->with('pesan', 'Data berhasil di hapus');
+        return redirect('/dashboard_admin')->with('pesan', 'Data berhasil di hapus');
     }
 }

@@ -24,7 +24,8 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashbord', [WebController::class, 'dashbord']);
+    // Route::get('/home', [WebController::class, 'dashbord']);
+    Route::get('/dashbord', [WebController::class, 'dashbord'])->name('home_user');
     Route::get('/logout', [LoginController::class, 'logout']);
     Route::get('/informasi_pilihan', [WebController::class, 'informasi_pilihan']);
     Route::post('/pesan', [SystemController::class, 'pesan']);
@@ -34,7 +35,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth:admin')->group(function () {
-    Route::get('/dashboard_admin', [WebController::class, 'dashboard_admin']);
+    // Route::get('/', [WebController::class, 'dashboard_admin'])->name('login');
+    Route::get('/dashboard_admin', [WebController::class, 'dashboard_admin'])->name('home_admin');
     Route::get('/hapus_data_history', [SystemController::class, 'hapus_data_history']);
     Route::get('/manajemen_user', [WebController::class, 'manajemen_user']);
     Route::post('/manajemen_user_cari', [WebController::class, 'manajemen_user']);
