@@ -43,13 +43,13 @@ class LoginController extends Controller
             // 'nama' => 'required|string|min:4',
             'tingkat' => 'required|integer',
             // username hanya menerima huruf,angka
-            'username' => 'required|regex:/^[a-zA-Z0-9]+$/|string|min:4',
+            'username' => 'required|regex:/^[a-zA-Z0-9]+$/|string|min:4|max:20',
             // 'username' => 'required|min:4',
             //email hanya menerima email yang benar, huruf, angka, titik, dan underscore
             'email' => 'required|email:rfc,dns|regex:/^[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-zA-Z0-9.]+$/|string|min:4',
             // 'email' => 'required|email:rfc,dns',
             //password hanya menerima huruf, angka, titik, dan underscore
-            'password' => 'required|regex:/^[a-zA-Z0-9._]+$/|string|min:6',
+            'password' => 'required|regex:/^[a-zA-Z0-9._]+$/|string|min:6|max:20',
             // 'password' => 'required|min:6'
         ]);
         $data->prodi = $request->prodi;
@@ -60,7 +60,7 @@ class LoginController extends Controller
         $data->password = bcrypt($request->password);
         $nilai = $data->save();
         if ($nilai) {
-            return redirect()->intended('/')->with('pesan', 'data sudah di daftarkan segera lakukan login');
+            return redirect()->intended('/')->with('pesan_registrasi', 'data sudah di daftarkan segera lakukan login');
         } else {
             return redirect()->intended('/')->with('pesan', 'Maaf data belum masuk silahkan lakukan registrasi');
         }
@@ -69,8 +69,8 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $validasi = $request->validate([
-            'username' => 'required|regex:/^[a-zA-Z0-9]+$/|string|min:4',
-            'password' => 'required|regex:/^[a-zA-Z0-9._]+$/|string|min:6',
+            'username' => 'required|regex:/^[a-zA-Z0-9]+$/|string|min:4|max:20',
+            'password' => 'required|regex:/^[a-zA-Z0-9._]+$/|string|min:6|max:20',
         ]);
         if (Auth::attempt($validasi)) {
             $request->session()->regenerate();

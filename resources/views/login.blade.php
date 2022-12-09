@@ -36,7 +36,21 @@
                                     aria-label="Close"></button>
                             </div>
                         @endif
+                        @if (session('pesan_registrasi'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('pesan_registrasi') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
                         @error('username')
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ $message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @enderror
+                        @error('password')
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 {{ $message }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
