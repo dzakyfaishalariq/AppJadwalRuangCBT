@@ -23,30 +23,30 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        User::create([
-            'prodi' => 'Fakultas Keperawatan',
-            'nama' => 'Budi Setiyawan',
-            'tingkat' => 1,
-            'username' => 'budi234',
-            'email' => 'budi@gmail.com',
-            'password' => bcrypt('budi12345'),
-        ]);
-        User::create([
-            'prodi' => 'STR Kebidanan',
-            'nama' => 'Erlin Kurnia',
-            'tingkat' => 2,
-            'username' => 'erlin123',
-            'email' => 'Erlin@gmail.com',
-            'password' => bcrypt('Erlin12345'),
-        ]);
-        User::create([
-            'prodi' => 'D3 Gizi',
-            'nama' => 'Andi Gustiyo',
-            'tingkat' => 4,
-            'username' => 'Andi123',
-            'email' => 'Andi@gmail.com',
-            'password' => bcrypt('Andi12345'),
-        ]);
+        // User::create([
+        //     'prodi' => 'Fakultas Keperawatan',
+        //     'nama' => 'Budi Setiyawan',
+        //     'tingkat' => 1,
+        //     'username' => 'budi234',
+        //     'email' => 'budi@gmail.com',
+        //     'password' => bcrypt('budi12345'),
+        // ]);
+        // User::create([
+        //     'prodi' => 'STR Kebidanan',
+        //     'nama' => 'Erlin Kurnia',
+        //     'tingkat' => 2,
+        //     'username' => 'erlin123',
+        //     'email' => 'Erlin@gmail.com',
+        //     'password' => bcrypt('Erlin12345'),
+        // ]);
+        // User::create([
+        //     'prodi' => 'D3 Gizi',
+        //     'nama' => 'Andi Gustiyo',
+        //     'tingkat' => 4,
+        //     'username' => 'Andi123',
+        //     'email' => 'Andi@gmail.com',
+        //     'password' => bcrypt('Andi12345'),
+        // ]);
 
         // admin
 
